@@ -1,5 +1,6 @@
 package com.Kobiton.uiautomator;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import static  androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import androidx.test.rule.ActivityTestRule;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -137,8 +139,8 @@ public class UiAutomatorTesting {
        //UiObject2 settingButton = mDevice.findObject(By.text("Settings"));
 
       // mDevice.findObject(new UiSelector().resourceId("io.github.hidroh.materialistic:id/drawer_account")).click();
-       UiObject2 viewMenu = mDevice.findObject(By.res("io.github.hidroh.materialistic:id/drawer"));
-       viewMenu.scroll(Direction.DOWN,1000,100);
+      // UiObject2 viewMenu = mDevice.findObject(By.res("io.github.hidroh.materialistic:id/drawer"));
+       //viewMenu.scroll(Direction.DOWN,1000,100);
 
     }
     @Test
@@ -158,7 +160,56 @@ public class UiAutomatorTesting {
             }
         }
     }
-    
+    @Test
+    public  void ChangeDisplaySetting() throws  UiObjectNotFoundException
+    {
+        OpenMenu();
+        UiObject2 SettingButton = mDevice.wait(Until.findObject(By.text("Settings")),5000);
+        if (SettingButton!=null && SettingButton.isClickable()==true)
+        {
+            SettingButton.click();
+        }
+        else
+        {
+            GetLayoutMenu().scroll(Direction.DOWN,300,1000);
+            SettingButton = mDevice.wait(Until.findObject(By.textContains("ettings")),5000);
+            SettingButton.click();
+            UiObject2 DisplayOption = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/drawer_display")),5000);
+            if(DisplayOption.isClickable()==true)
+            {
+                DisplayOption.clickAndWait(Until.newWindow(),5000);
+
+            }
+            List<UiObject2> listThemes = mDevice.wait(Until.findObjects(By.res("io.github.hidroh.materialistic:id/content")),5000);
+            Assert.assertNotNull("list Them is empty",listThemes);
+            if(listThemes.isEmpty()==false)
+            {
+                listThemes.get(2).click();
+            }
+
+
+
+        }
+
+    }
+
+    //Open Menu
+    private  void OpenMenu()
+    {
+        UiObject2 buttonMenu = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/toolbar")),5000);
+        List<UiObject2> listItem = buttonMenu.getChildren();
+        if (listItem!=null) {
+            listItem.get(0).click();
+
+        }
+    }
+    private  UiObject2 GetLayoutMenu()
+    {
+        UiObject2 layoutMenu = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/drawer")),5000);
+        return  layoutMenu;
+    }
+
+
 
 
 }
