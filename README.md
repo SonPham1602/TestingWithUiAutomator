@@ -28,6 +28,31 @@ The UI Automator APIs allow you to write robust tests without needing to know ab
 ## What is UiObject?
 A UiObject is a representation of a view. A UiObject contains information to help it locate a matching view at runtime based on the UiSelector properties specified in its constructor.
 Note: Once you create an instance of a UiObject, it can be reused foe different views that match the selector criteria.
+## How to build and run UI Automator by command lines
+
+Step 1: Build Debug
+    
+    ./gradlew assemble
+    
+Step 2: Build Debug Test
+    
+    ./gradlew assembleAndroidTest
+    
+Step 3: Install Debug on your device
+
+    ./gradlew install <your-path-debug-file>
+    Ex:adb install -r app/build/outputs/apk/debug/app-debug.apk
+    
+Step 4: Install Debug Test on your device
+
+     ./gradlew install <your-path-debug-test-file>
+     Ex:adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk 
+
+Step 5: Run on Device
+    
+    ./gradlew connectedTest
+
+Note: You can use ./gradlew cAT to build debug and debug test
 
 
 
