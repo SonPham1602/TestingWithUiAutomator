@@ -56,6 +56,22 @@ Step 5: Run on Device
     ./gradlew connectedTest
 
 Note: You can use ./gradlew cAT to build debug and debug test
+## What is the defferences between UiObject and UiObject2 ?
+
+* What the represent
+* Waiting for views to exist/finding views
+* Scrolling
+
+### What they represent
+
+**UIObject2** is a direct representation of a real view that exists on the screen and  allows you to take actions on that view.
+**UiObject** is a representation of how to find an element that may be on the screen, combined with actions that you can take on that view.
+
+### Waiting for views to exisr/finding views
+
+You will likely want to wait for a view to exist on the page after you take an action
+
+
 
 
 
