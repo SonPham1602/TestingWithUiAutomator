@@ -28,6 +28,9 @@ The UI Automator APIs allow you to write robust tests without needing to know ab
 ## What is UiObject?
 A UiObject is a representation of a view. A UiObject contains information to help it locate a matching view at runtime based on the UiSelector properties specified in its constructor.
 Note: Once you create an instance of a UiObject, it can be reused foe different views that match the selector criteria.
+
+## What is UiObject2?
+A UiObject2 represents a UI element.Unlike UiObject. It is bound to a particular view instance and can become stale if the underlying view object is destroyed. As a result, it may be necessary to call findObject(BySelector) to obtaina new UiObject2 instance if the UI changes
 ## How to build and run UI Automator by command lines
 
 Step 1: Build Debug
