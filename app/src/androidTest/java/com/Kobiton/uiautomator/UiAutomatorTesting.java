@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.provider.Contacts;
 
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -192,7 +193,24 @@ public class UiAutomatorTesting {
         }
 
     }
+    @Test
+    public void SeachingTesting() throws  UiObjectNotFoundException
+    {
+        UiObject2 searchButton = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/search_button")),5000);
+        if(searchButton.isClickable() == true && searchButton != null)
+        {
+            searchButton.clickAndWait(Until.newWindow(),5000);
+            UiObject2 textSearch = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/search_src_text")),5000);
+            textSearch.setText("Kobiton");
+            mDevice.pressKeyCode(66);
+        }
+    }
+    @Test
+    public void LoginWithKobiton() throws UiObjectNotFoundException
+    {
+       LoginWithKobitonAccount();
 
+    }
     //Open Menu
     private  void OpenMenu()
     {
@@ -207,6 +225,34 @@ public class UiAutomatorTesting {
     {
         UiObject2 layoutMenu = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/drawer")),5000);
         return  layoutMenu;
+    }
+    private  void LoginWithKobitonAccount() throws  UiObjectNotFoundException
+    {
+        OpenMenu();
+        UiObject2 Loginbutton = mDevice.findObject(By.res("io.github.hidroh.materialistic:id/drawer_account"));
+        if(Loginbutton.isClickable() == true)
+        {
+            Loginbutton.click();
+        }
+        boolean checktextName = mDevice.wait(Until.hasObject(By.res("io.github.hidroh.materialistic:id/edittext_username")),5000);
+        if(checktextName == true)
+        {
+            mDevice.findObject(By.res("io.github.hidroh.materialistic:id/edittext_username")).setText("KobitonTesting");
+            UiObject2 textPass = mDevice.findObject(By.res("io.github.hidroh.materialistic:id/edittext_password"));
+            if(textPass.isClickable() == true)
+            {
+                textPass.setText("12345678");
+            }
+            mDevice.findObject(By.text("LOGIN")).click();
+        }
+        else
+        {
+            UiObject2 KobitonSelect = mDevice.wait(Until.findObject(By.text("KobitonTesting")),5000);
+            KobitonSelect.click();
+            mDevice.findObject(By.text("OK")).click();
+
+        }
+
     }
 
 
