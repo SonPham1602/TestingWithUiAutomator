@@ -14,6 +14,7 @@ import android.content.pm.ResolveInfo;
 import android.provider.Contacts;
 
 
+import androidx.test.espresso.core.internal.deps.guava.util.concurrent.Uninterruptibles;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -211,13 +212,42 @@ public class UiAutomatorTesting {
        LoginWithKobitonAccount();
 
     }
+    @Test
+    public  void TestingControllWebview() throws  UiObjectNotFoundException
+    {
+        List<UiObject2> ListItem = mDevice.wait(Until.findObjects(By.res("io.github.hidroh.materialistic:id/story_view")),5000);
+        ListItem.get(2).click();
+
+        UiObject2 Toggle = mDevice.wait(Until.findObject(By.res("toggle-nav")),5000);
+        UiObject2 Author = mDevice.wait(Until.findObject(By.text("Lawrence Abrams")),5000);
+        if(Author!=null)
+        {
+            Author.click();
+        }
+        else
+        {
+            UiObject2 WebViewLayout = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/scroll_view_content")),5000);
+            //boolean checkExist = mDevice.wait(Until.hasObject(By.text("Lawrence Abrams")),5000);
+
+               // WebViewLayout.scroll(Direction.DOWN,,300);
+                //Author = mDevice.wait(Until.findObject(By.text("Lawrence Abrams")),5000);
+                //Author.click();
+            mDevice.wait(Until.findObject(By.desc("Lawrence Abrams")),5000).click();
+//            WebViewLayout.scroll(Direction.DOWN,10,300);
+//            Author = mDevice.wait(Until.findObject(By.text("Lawrence Abrams")),5000);
+//            Author.click();
+        }
+        //Toggle.click();
+        //io.github.hidroh.materialistic:id/scroll_view_content
+
+    }
     //Open Menu
     private  void OpenMenu()
     {
         UiObject2 buttonMenu = mDevice.wait(Until.findObject(By.res("io.github.hidroh.materialistic:id/toolbar")),5000);
         List<UiObject2> listItem = buttonMenu.getChildren();
         if (listItem!=null) {
-            listItem.get(0).click();
+            listItem.get(2).click();
 
         }
     }
