@@ -37,6 +37,7 @@ import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentat
 import static  androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import androidx.test.rule.ActivityTestRule;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -240,6 +241,12 @@ public class UiAutomatorTesting {
         //Toggle.click();
         //io.github.hidroh.materialistic:id/scroll_view_content
 
+    }
+    @Test
+    public  void TestingScreenShot() throws UiObjectNotFoundException
+    {
+        File Path = new File("/sdcard/Screenshots/testing.png");
+        mDevice.takeScreenshot(Path,0.5f,25);
     }
     //Open Menu
     private  void OpenMenu()
